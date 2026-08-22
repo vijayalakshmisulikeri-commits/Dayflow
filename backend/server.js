@@ -2,6 +2,7 @@ const express = require('express');
 const authRoutes = require("./routes/auth");
 const authMiddleware = require("./middleware/authMiddleware");
 const roleMiddleware = require("./middleware/roleMiddleware");
+const leaveRoutes = require("./routes/leave");
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ mongoose.connect(
 
 
 app.use('/auth', authRoutes);
+app.use("/leave", leaveRoutes);
 
 app.get("/employee-dashboard", authMiddleware, roleMiddleware("Employee"), (req, res) => {
   res.json({ msg: "Welcome Employee Dashboard" });
@@ -23,5 +25,6 @@ app.get("/employee-dashboard", authMiddleware, roleMiddleware("Employee"), (req,
 app.get("/admin-dashboard", authMiddleware, roleMiddleware("Admin"), (req, res) => {
   res.json({ msg: "Welcome Admin Dashboard" });
 });
+
 
 app.listen(3000, () => console.log("Server running on port 3000"));
