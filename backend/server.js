@@ -1,8 +1,16 @@
 const express = require('express');
-const authRoutes = require("./routes/auth");
-const authMiddleware = require("./middleware/authMiddleware");
-const roleMiddleware = require("./middleware/roleMiddleware");
-const leaveRoutes = require("./routes/leave");
+const authRoutes = require('./routes/auth');
+const leaveRoutes = require('./routes/leave');
+const attendanceRoutes = require('./routes/attendance');
+const dashboardRoutes = require('./routes/dashboard');
+
+const Leave = require('./models/Leave');
+const Attendance = require('./models/Attendance');
+const User = require('./models/User');
+const Payroll = require('./models/Payroll');
+
+const { verifyToken, requireAdmin } = require('./middleware/authCheck');
+const roleCheck = require('./middleware/roleCheck');
 
 const app = express();
 app.use(express.json());
@@ -14,17 +22,15 @@ mongoose.connect(
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
-
 app.use('/auth', authRoutes);
 app.use("/leave", leaveRoutes);
 
-app.get("/employee-dashboard", authMiddleware, roleMiddleware("Employee"), (req, res) => {
+app.get("/employee-dashboard", verifyToken, roleCheck("Employee"), (req, res) => {
   res.json({ msg: "Welcome Employee Dashboard" });
 });
 
-app.get("/admin-dashboard", authMiddleware, roleMiddleware("Admin"), (req, res) => {
+app.get("/admin-dashboard", verifyToken, requireAdmin, (req, res) => {
   res.json({ msg: "Welcome Admin Dashboard" });
 });
-
 
 app.listen(3000, () => console.log("Server running on port 3000"));
