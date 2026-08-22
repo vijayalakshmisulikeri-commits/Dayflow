@@ -1,0 +1,274 @@
+:root {
+  --ink: #1c2024;
+  --muted: #6b7280;
+  --border: #e2e5e9;
+  --surface: #ffffff;
+  --canvas: #f7f8fa;
+  --accent: #2f6f4e;      /* present / approved */
+  --accent-soft: #e7f2ec;
+  --warn: #b45309;         /* half-day / pending */
+  --warn-soft: #fdf1e0;
+  --danger: #b3261e;       /* absent / rejected */
+  --danger-soft: #fbe9e8;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(20, 20, 20, 0.06);
+}
+
+.hrms-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 22px;
+}
+
+.hrms-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 14px;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Check in/out ---------- */
+.checkin-widget {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.checkin-status {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.checkin-status .label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.checkin-status .time {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.hrms-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.hrms-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hrms-btn.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.hrms-btn.danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.hrms-btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+.hrms-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* ---------- Status pill ---------- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-pill.present,
+.status-pill.approved {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.status-pill.half-day,
+.status-pill.pending {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.status-pill.absent,
+.status-pill.leave,
+.status-pill.rejected {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ---------- Attendance table ---------- */
+.attendance-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.attendance-toggle button {
+  border: 1px solid var(--border);
+  background: var(--canvas);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.attendance-toggle button.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+
+.hrms-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.hrms-table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.hrms-table td {
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--ink);
+}
+
+.hrms-table tr:last-child td {
+  border-bottom: none;
+}
+
+.hrms-empty {
+  color: var(--muted);
+  font-size: 13.5px;
+  padding: 18px 4px;
+  text-align: center;
+}
+
+/* ---------- Leave request form ---------- */
+.leave-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.leave-form-row {
+  display: flex;
+  gap: 14px;
+}
+
+.leave-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.leave-form-field label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.leave-form-field select,
+.leave-form-field input,
+.leave-form-field textarea {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-size: 14px;
+  color: var(--ink);
+  font-family: inherit;
+  background: var(--surface);
+}
+
+.leave-form-field textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.form-msg {
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.form-msg.success {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.form-msg.error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ---------- Admin approval ---------- */
+.approval-row-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.approval-remarks {
+  color: var(--muted);
+  font-size: 13px;
+  max-width: 220px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.filter-bar button {
+  border: 1px solid var(--border);
+  background: var(--canvas);
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.filter-bar button.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
