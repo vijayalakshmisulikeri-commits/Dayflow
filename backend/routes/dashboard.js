@@ -1,18 +1,20 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { verifyToken, requireAdmin } = require('../middleware/authCheck');
-const roleCheck = require('../middleware/roleCheck');
-const dashboardController = require('../controllers/dashboardController');
 
+const { verifyToken } = require("../middleware/authCheck");
+const roleCheck = require("../middleware/roleCheck");
+const { getEmployeeDashboard } = require("../controllers/dashboardController");
+const { getAdminDashboard } = require("../controllers/adminDashboardController");
 
-// GET /api/dashboard/employee/:id — aggregated employee dashboard
+// Employee: own dashboard
 router.get(
   "/employee/:id",
   verifyToken,
   roleCheck("Employee", "Admin"),
-  dashboardController.getEmployeeDashboard
+  getEmployeeDashboard
 );
 
-// Admin dashboard route goes here later once you get to the admin half
+// Admin: employee list + attendance overview + pending leave approvals
+router.get("/admin", verifyToken, roleCheck("Admin"), getAdminDashboard);
 
 module.exports = router;

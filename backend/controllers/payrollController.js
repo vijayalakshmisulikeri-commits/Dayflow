@@ -1,15 +1,6 @@
 const Payroll = require("../models/Payroll");
 const { computeAttendanceAdjustedSalary } = require("../utils/payrollCalc");
 
-/**
- * GET /api/payroll/me
- * Access: Employee (own record only, read-only)
- * Query params: ?year=2026&month=8 (defaults to current month)
- *
- * Returns the fixed salary structure AND an attendance-adjusted
- * payable amount for the requested month (present days + approved
- * paid/sick leave counted, unpaid absences deducted).
- */
 async function getMyPayroll(req, res) {
   try {
     const employee = req.user.id;
@@ -40,9 +31,9 @@ async function getMyPayroll(req, res) {
         deductions: payroll.deductions,
         grossSalary: payroll.grossSalary,
         totalDeductions: payroll.totalDeductions,
-        netSalary: payroll.netSalary, // full/fixed net (no attendance adjustment)
+        netSalary: payroll.netSalary,
       },
-      monthlyBreakdown, // attendance-adjusted payable amount for the requested month
+      monthlyBreakdown,
     });
   } catch (err) {
     console.error("getMyPayroll error:", err);
