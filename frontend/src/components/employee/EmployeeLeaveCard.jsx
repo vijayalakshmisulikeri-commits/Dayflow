@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { applyForLeave } from "../../api/leaveApi";
+import { applyForLeave } from "../../api/leaveapi2";
 
 export default function EmployeeLeaveCard({ recentLeaves, onLeaveApplied }) {
   const [showForm, setShowForm] = useState(false);

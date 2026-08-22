@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { reviewLeave } from "../../api/leaveApi";
+import { reviewLeave } from "../../api/leaveapi2";
 
 export default function AdminLeaveApprovalPanel({ pendingLeaveRequests, onReviewed }) {
   const [processingId, setProcessingId] = useState(null);
