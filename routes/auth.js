@@ -9,9 +9,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 =======
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
->>>>>>> c4bb775 (changed controller folder and updated payroll file)
+
 
 // 🔑 Signup
 router.post("/signup", async (req, res) => {
@@ -129,9 +127,6 @@ router.put("/profile/me", authMiddleware, async (req, res) => {
 =======
   res.send({ message: "Login successful", role: user.role });
   
-  const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
-res.send({ message: "Login successful", token, role: user.role, id: user._id });
->>>>>>> c4bb775 (changed controller folder and updated payroll file)
-});
+ 
 
 module.exports = router;

@@ -1,0 +1,132 @@
+.dashboard-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1a1a1a;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.card h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-approved,
+.badge-present {
+  background: #e3f7e8;
+  color: #1e7d34;
+}
+
+.badge-pending,
+.badge-half-day {
+  background: #fff4e0;
+  color: #a15c00;
+}
+
+.badge-rejected,
+.badge-absent {
+  background: #fde3e3;
+  color: #b02020;
+}
+
+.badge-leave {
+  background: #e6ecff;
+  color: #2b4fc4;
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-approve {
+  background: #1e7d34;
+  color: white;
+  margin-right: 8px;
+}
+
+.btn-reject {
+  background: #b02020;
+  color: white;
+}
+
+.btn-save {
+  background: #2b4fc4;
+  color: white;
+  margin-top: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.loading-text,
+.error-text {
+  font-size: 14px;
+  color: #777;
+}
+
+.error-text {
+  color: #b02020;
+}
+
+.input-field {
+  width: 100%;
+  padding: 6px 8px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+}
