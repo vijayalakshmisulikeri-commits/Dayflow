@@ -4,8 +4,9 @@ const router = express.Router();
 const authMiddleware = require("../middleware/auth");
 const roleCheck = require("../middleware/roleCheck");
 const { getEmployeeDashboard } = require("../controllers/dashboardController");
+const { getAdminDashboard } = require("../controllers/adminDashboardController");
 
-// GET /api/dashboard/employee/:id — aggregated employee dashboard
+// Employee: own dashboard
 router.get(
   "/employee/:id",
   authMiddleware,
@@ -13,6 +14,7 @@ router.get(
   getEmployeeDashboard
 );
 
-// Admin dashboard route goes here later once you get to the admin half
+// Admin: employee list + attendance overview + pending leave approvals
+router.get("/admin", authMiddleware, roleCheck("Admin"), getAdminDashboard);
 
 module.exports = router;
