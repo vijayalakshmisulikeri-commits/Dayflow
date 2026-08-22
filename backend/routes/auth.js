@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create user
+    // Create user and auto‑verify
     const user = new User({
       email,
       password: hashedPassword,
@@ -37,32 +37,18 @@ router.post("/signup", async (req, res) => {
       name,
       phone,
       address,
-      verified: false
+      verified: true   // ✅ auto‑verified
     });
 
-    // Generate verification token
-    const token = jwt.sign({ id: user._id }, "secretKey", { expiresIn: "1d" });
-    user.verificationToken = token;
-    user.verificationExpires = Date.now() + 24 * 60 * 60 * 1000;
     await user.save();
 
-    // Send verification email
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: { user: "yourEmail@gmail.com", pass: "yourPassword" }
-    });
-
-    await transporter.sendMail({
-      to: user.email,
-      subject: "Verify your email",
-      text: `Click here to verify: http://localhost:3000/auth/verify/${token}`
-    });
-
-    res.status(201).json({ msg: "Signup successful. Please check your email to verify." });
+    res.status(201).json({ msg: "Signup successful. User auto‑verified." });
   } catch (err) {
     res.status(500).json({ msg: "Server error", error: err.message });
   }
 });
+
+
 
 // 🔑 Verify Email
 router.get("/verify/:token", async (req, res) => {

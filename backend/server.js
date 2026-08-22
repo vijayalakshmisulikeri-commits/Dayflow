@@ -22,8 +22,12 @@ mongoose.connect(
 .then(() => console.log("✅ Connected to MongoDB Atlas"))
 .catch(err => console.error("❌ MongoDB connection error:", err));
 
-app.use('/auth', authRoutes);
-app.use("/leave", leaveRoutes);
+app.use('/api/auth', authRoutes);
+
+
+app.use('/api/leave', leaveRoutes);
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 app.get("/employee-dashboard", verifyToken, roleCheck("Employee"), (req, res) => {
   res.json({ msg: "Welcome Employee Dashboard" });
