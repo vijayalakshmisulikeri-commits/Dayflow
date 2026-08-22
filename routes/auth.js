@@ -1,10 +1,17 @@
 const express = require("express");
 const router = express.Router();
+<<<<<<< HEAD
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const User = require("../models/User");
 const authMiddleware = require("../middleware/authMiddleware");
+=======
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
+>>>>>>> c4bb775 (changed controller folder and updated payroll file)
 
 // 🔑 Signup
 router.post("/signup", async (req, res) => {
@@ -66,6 +73,7 @@ router.get("/verify/:token", async (req, res) => {
       return res.status(400).json({ msg: "Invalid or expired token" });
     }
 
+<<<<<<< HEAD
     user.verified = true;
     user.verificationToken = undefined;
     user.verificationExpires = undefined;
@@ -118,6 +126,12 @@ router.put("/profile/me", authMiddleware, async (req, res) => {
   } catch (err) {
     res.status(500).json({ msg: "Server error" });
   }
+=======
+  res.send({ message: "Login successful", role: user.role });
+  
+  const token = jwt.sign({ id: user._id, role: user.role }, JWT_SECRET, { expiresIn: '8h' });
+res.send({ message: "Login successful", token, role: user.role, id: user._id });
+>>>>>>> c4bb775 (changed controller folder and updated payroll file)
 });
 
 module.exports = router;

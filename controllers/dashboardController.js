@@ -1,65 +1,67 @@
-const Employee = require("../models/_employeeStub"); // swap for teammate's real model
-const { Attendance, Leave } = require("../models/_teammateStubs"); // swap for real models
+const Employee = require("../models/User");
+const Attendance = require("../models/Attendance");
+const Leave = require("../models/Leave");
 const Payroll = require("../models/Payroll");
+const { computeAttendanceAdjustedSalary } = require("../utils/payrollCalc");
 
 /**
  * GET /api/dashboard/employee/:id
  * Access: Employee (own dashboard only)
  *
- * Aggregates: profile summary, attendance summary (this month),
- * recent leave requests + their status, and a payroll snapshot.
- * This endpoint doesn't own any of the underlying data — it just
- * pulls a summary slice from each collection for the dashboard cards.
+ * Aggregates: profile, this month's attendance summary, recent leave
+ * requests, and a payroll snapshot (attendance-adjusted).
  */
 async function getEmployeeDashboard(req, res) {
   try {
     const { id } = req.params;
 
-    // Guard: employees can only view their own dashboard
     if (req.user.role === "Employee" && req.user.id !== id) {
       return res.status(403).json({ message: "Cannot view another employee's dashboard" });
     }
 
-    const employee = await Employee.findById(id).select(
-      "name email role employeeIdCode department designation profilePicture"
-    );
+    const employee = await Employee.findById(id).select("name email role phone address");
     if (!employee) {
       return res.status(404).json({ message: "Employee not found" });
     }
 
-    // Attendance summary for the current month
-    const startOfMonth = new Date();
-    startOfMonth.setDate(1);
-    startOfMonth.setHours(0, 0, 0, 0);
+    const now = new Date();
+    const year = now.getUTCFullYear();
+    const month = now.getUTCMonth() + 1;
+    const startOfMonth = new Date(Date.UTC(year, month - 1, 1));
 
     const attendanceRecords = await Attendance.find({
-      employeeId: id,
+      employee: id,
       date: { $gte: startOfMonth },
     });
 
     const attendanceSummary = {
-      present: attendanceRecords.filter((a) => a.status === "Present").length,
-      absent: attendanceRecords.filter((a) => a.status === "Absent").length,
-      halfDay: attendanceRecords.filter((a) => a.status === "Half-day").length,
-      onLeave: attendanceRecords.filter((a) => a.status === "Leave").length,
+      present: attendanceRecords.filter((a) => a.status === "present").length,
+      absent: attendanceRecords.filter((a) => a.status === "absent").length,
+      halfDay: attendanceRecords.filter((a) => a.status === "half-day").length,
+      onLeave: attendanceRecords.filter((a) => a.status === "leave").length,
     };
 
-    // Most recent leave requests (last 5)
-    const recentLeaves = await Leave.find({ employeeId: id })
+    const recentLeaves = await Leave.find({ employee: id })
       .sort({ createdAt: -1 })
       .limit(5)
-      .select("leaveType startDate endDate status remarks");
+      .select("leaveType startDate endDate status remarks adminComment");
 
-    // Payroll snapshot (net salary only — full breakdown lives at /api/payroll/me)
-    const payroll = await Payroll.findOne({ employeeId: id }).select("netSalary payDate");
+    const payroll = await Payroll.findOne({ employee: id });
+    let payrollSnapshot = null;
+    if (payroll) {
+      const breakdown = await computeAttendanceAdjustedSalary(id, payroll, year, month);
+      payrollSnapshot = {
+        netPayable: breakdown.netPayable,
+        payableDays: breakdown.payableDays,
+        workingDays: breakdown.workingDays,
+      };
+    }
 
     res.status(200).json({
       profile: employee,
       attendanceSummary,
       recentLeaves,
-      payrollSnapshot: payroll
-        ? { netSalary: payroll.netSalary, payDate: payroll.payDate }
-        : null,
+      payrollSnapshot,
     });
   } catch (err) {
     console.error("getEmployeeDashboard error:", err);
