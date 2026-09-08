@@ -1,5 +1,9 @@
 require("dotenv").config();
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
@@ -9,7 +13,9 @@ const dashboardRoutes = require("./routes/dashboard");
 const payrollRoutes = require("./routes/payroll");
 
 const app = express();
+app.use(cors());
 app.use(express.json());
+
 
 mongoose
   .connect(process.env.MONGO_URI)
