@@ -2,9 +2,9 @@
 
 > **Every workday, perfectly aligned.**
 
-Dayflow is a **Human Resource Management System (HRMS)** designed to digitize and streamline essential HR operations within an organization.
+Dayflow is a full-stack **Human Resource Management System (HRMS)** designed to digitize and streamline essential HR operations through a centralized platform.
 
-The system provides separate experiences for **Admin/HR Officers** and **Employees**, allowing organizations to manage employee information, attendance, leave requests, payroll visibility, and approval workflows through a centralized platform.
+The system provides separate role-based experiences for **Employees** and **Admin/HR Officers**, allowing organizations to manage employee information, attendance, leave requests, payroll information, approval workflows, notifications, and reports from a single platform.
 
 ---
 
@@ -15,413 +15,425 @@ The system provides separate experiences for **Admin/HR Officers** and **Employe
 * [Objectives](#-objectives)
 * [Key Features](#-key-features)
 * [User Roles](#-user-roles)
+* [Feature Access Matrix](#-feature-access-matrix)
 * [System Modules](#-system-modules)
 * [Application Workflow](#-application-workflow)
-* [Functional Requirements](#-functional-requirements)
-* [Non-Functional Requirements](#-non-functional-requirements)
+* [System Architecture](#-system-architecture)
 * [Technology Stack](#-technology-stack)
 * [Project Structure](#-project-structure)
 * [Getting Started](#-getting-started)
-* [Usage](#-usage)
-* [Security](#-security)
+* [Environment Configuration](#-environment-configuration)
+* [Running the Application](#-running-the-application)
+* [Testing](#-testing)
+* [Screenshots](#-screenshots)
+* [Security & Access Control](#-security--access-control)
+* [Project Status](#-project-status)
 * [Future Enhancements](#-future-enhancements)
-* [Contributing](#-contributing)
+* [Contributors](#-contributors)
 * [License](#-license)
-* [Contact](#-contact)
 
 ---
 
-## Overview
+# Overview
 
-Managing HR activities manually can be time-consuming and can lead to issues such as scattered employee records, difficulty tracking attendance, delayed leave approvals, and limited visibility into payroll information.
+Human resource activities such as employee management, attendance tracking, leave processing, and salary management can become difficult to maintain when handled manually or across disconnected systems.
 
-**Dayflow** aims to provide a centralized HR platform where employees and HR personnel can perform their respective tasks efficiently.
+**Dayflow** provides a centralized digital HR platform where employees can access their personal HR information and perform everyday HR tasks, while Admin/HR users can manage employees and monitor organizational HR operations.
 
-The system supports:
+The system is designed around **role-based access**, providing different capabilities depending on whether the logged-in user is an Employee or Admin/HR Officer.
 
-* Secure authentication
-* Role-based authorization
-* Employee profile management
-* Attendance tracking
-* Leave and time-off management
-* Leave approval workflows
-* Payroll/salary visibility
-* Email and notification alerts
-* Analytics and reports
-
-These capabilities are part of the defined HRMS scope.
+The project scope includes authentication, employee profile management, attendance tracking, leave management, payroll visibility, approval workflows, notifications, and reporting.
 
 ---
 
-## Problem Statement
+# Problem Statement
 
-Organizations often manage employee information, attendance, leave requests, and salary-related information using multiple systems or manual processes.
+Traditional HR processes can involve:
 
-This can result in:
-
-* Difficulty maintaining employee records
-* Time-consuming attendance management
-* Delays in leave approvals
-* Lack of centralized HR information
-* Limited employee access to their own records
+* Manual employee records
+* Spreadsheet-based attendance
+* Delayed leave approvals
+* Scattered employee information
+* Limited employee access to HR information
+* Manual salary/payroll management
 * Increased administrative workload
 * Difficulty generating HR reports
 
-Dayflow addresses these challenges by bringing important HR operations into a **single centralized system**.
+These processes can result in inefficiency, duplication of work, and difficulty maintaining up-to-date records.
+
+### Proposed Solution
+
+Dayflow brings core HR operations together into one centralized platform.
+
+Employees can access their own HR information and submit requests, while Admin/HR users can manage employee records, attendance, leave approvals, salary information, and HR-related activities.
 
 ---
 
-## Objectives
+# Objectives
 
-The main objectives of Dayflow are:
+The primary objectives of Dayflow are:
 
 1. Digitize common HR operations.
 2. Provide secure user authentication.
-3. Implement role-based access for Employees and Admin/HR Officers.
+3. Implement role-based access control.
 4. Centralize employee information.
-5. Provide daily and weekly attendance tracking.
-6. Simplify leave application and approval.
-7. Provide employees with read-only salary information.
-8. Allow HR/Admin users to manage payroll information.
+5. Simplify attendance tracking.
+6. Streamline leave application and approval.
+7. Provide controlled payroll and salary visibility.
+8. Reduce manual HR workload.
 9. Provide notifications and alerts.
-10. Generate useful HR analytics and reports.
+10. Support HR reports and analytics.
 
 ---
 
 # Key Features
 
-## 1. Authentication & Authorization
+## Authentication & Authorization
 
-Dayflow provides secure account registration and login.
-
-### Sign Up
-
-Users can register using:
-
-* Employee ID
-* Email
-* Password
-* Role
-
-Supported roles include:
-
-* Employee
-* HR/Admin
-
-Email verification is required during registration.
-
-### Sign In
-
-Users can log in using:
-
-```text
-Email + Password
-```
-
-The system validates the credentials and redirects authenticated users to the appropriate dashboard.
-
-Incorrect credentials result in an appropriate error message.
+* User registration
+* User login
+* Employee ID-based registration
+* Email-based authentication
+* Password authentication
+* Role selection
+* Employee and Admin/HR roles
+* Role-based dashboard access
+* Authentication error handling
 
 ---
 
-# User Roles
+## Employee Profile Management
 
-Dayflow supports two major user categories.
+Employees can access their HR profile containing:
 
-| Role             | Responsibilities                                             |
-| ---------------- | ------------------------------------------------------------ |
-| Admin / HR | Manage employees, attendance, leave approvals and payroll    |
-| Employee   | View profile, attendance, salary details and apply for leave |
-
-The Admin/HR role has management and approval privileges, while Employees have limited access to their own information.
-
----
-
-# Dashboards
-
-## Employee Dashboard
-
-The Employee Dashboard provides quick access to:
-
-* Profile
-* Attendance
-* Leave Requests
-* Logout
-* Recent activities
-* Alerts
-
-This allows employees to access their HR-related information from a single interface.
-
----
-
-## Admin / HR Dashboard
-
-The Admin/HR dashboard provides access to:
-
-* Employee list
-* Attendance records
-* Leave requests
-* Leave approvals
-* Employee switching
-* Payroll information
-* HR reports
-
-Admin/HR users can manage information across employees.
-
----
-
-# Employee Profile Management
-
-Dayflow provides centralized employee profile management.
-
-## View Profile
-
-Employees can view:
-
-* Personal information
+* Personal details
 * Job details
 * Salary structure
 * Documents
 * Profile picture
 
-## Edit Profile
-
-Employees can update limited information such as:
+Employees can edit permitted information such as:
 
 * Address
 * Phone number
 * Profile picture
 
-Administrators can modify complete employee details.
+Admin/HR users have broader employee-management privileges.
 
 ---
 
-# Attendance Management
+## Attendance Management
 
-Dayflow provides attendance tracking for employees and HR administrators.
+Dayflow provides centralized attendance tracking.
 
-## Attendance Features
+### Employee features
+
+* Check-in
+* Check-out
+* Daily attendance view
+* Weekly attendance view
+* Personal attendance history
+
+### Attendance statuses
+
+* 🟢 Present
+* 🔴 Absent
+* 🟡 Half-day
+* 🔵 Leave
+
+### Admin/HR features
+
+* View employee attendance
+* Monitor attendance records
+* Switch between employees
+* Manage attendance-related information
+
+---
+
+## Leave & Time-Off Management
+
+Employees can apply for leave through the platform.
+
+### Leave application
 
 Employees can:
 
-* Check in
-* Check out
-* View daily attendance
-* View weekly attendance
+* Select leave type
+* Select date range
+* Add remarks
+* Submit leave requests
+* Track request status
 
-Attendance statuses include:
-
-```text
-Present
-Absent
-Half-day
-Leave
-```
-
-### Access Control
-
-Employees can view only their own attendance.
-
-Admin/HR users can view attendance records for all employees.
-
----
-
-# Leave & Time-Off Management
-
-Employees can submit leave requests through the system.
-
-## Leave Application
-
-Employees can select:
-
-* Leave type
-* Start date
-* End date
-* Remarks
-
-Supported leave types include:
+### Supported leave types
 
 * Paid Leave
 * Sick Leave
 * Unpaid Leave
 
-## Leave Status
-
-Every request can have one of the following statuses:
+### Leave statuses
 
 ```text
 Pending
-Approved
-Rejected
+   │
+   ├──► Approved
+   │
+   └──► Rejected
 ```
 
-## Leave Approval
+### Admin/HR
 
 Admin/HR users can:
 
 * View leave requests
-* Approve requests
-* Reject requests
+* Approve leave
+* Reject leave
 * Add comments
-
-Changes are reflected immediately in the employee's records.
+* Monitor leave records
 
 ---
 
-# Payroll & Salary Management
+## Payroll & Salary Management
 
 Dayflow provides controlled access to salary and payroll information.
 
-## Employee Payroll View
+### Employee
 
-Employees can view their payroll information in **read-only mode**.
+Employees can:
 
-This prevents employees from directly modifying salary information.
+* View salary information
+* Access payroll-related details
+* View salary information in read-only mode
 
-## Admin Payroll Control
+### Admin/HR
 
-Administrators can:
+Admin/HR users can:
 
-* View payroll information of employees
+* View employee payroll information
 * Update salary structures
+* Manage salary-related information
 * Maintain payroll accuracy
 
 ---
 
-# Notifications & Reports
+## Dashboards
 
-Dayflow also supports:
+### Employee Dashboard
 
-### Notifications
+Provides quick access to:
 
-* Email alerts
-* System notifications
-* Leave-related updates
-* Important HR alerts
+* Profile
+* Attendance
+* Leave requests
+* Payroll information
+* Recent activity
+* Alerts
+* Logout
 
-### Reports & Analytics
+### Admin/HR Dashboard
 
-The system can provide HR analytics and reports such as:
+Provides access to:
+
+* Employee list
+* Attendance records
+* Leave requests
+* Leave approvals
+* Payroll information
+* Employee management
+* Reports and analytics
+
+---
+
+## Notifications & Alerts
+
+The system supports HR-related notifications and alerts.
+
+These can be used to communicate events such as:
+
+* Leave request updates
+* Approval/rejection status
+* Important HR activities
+* Other relevant alerts
+
+---
+
+## Reports & Analytics
+
+Dayflow supports HR-related reports and analytics.
+
+Possible reports include:
 
 * Attendance reports
 * Salary information
 * Salary slips
 * Employee-related reports
 
+These help Admin/HR users monitor HR operations and make better decisions.
+
 ---
 
-# Application Workflow
+# User Roles
 
-The general workflow of Dayflow can be represented as:
+## Admin / HR Officer
+
+Admin/HR users have management and approval privileges.
+
+They can:
+
+* Manage employees
+* View employee information
+* Monitor attendance
+* Approve/reject leave
+* Manage salary information
+* View HR records
+* Access reports and analytics
+
+## Employee
+
+Employees have access to their own HR information.
+
+They can:
+
+* View their profile
+* Edit permitted profile fields
+* Check in/out
+* View attendance
+* Apply for leave
+* Track leave requests
+* View salary information
+
+---
+
+# Feature Access Matrix
+
+| Feature                      | Employee | Admin / HR |
+| ---------------------------- | :------: | :--------: |
+| Sign Up                      |     ✅    |      ✅     |
+| Sign In                      |     ✅    |      ✅     |
+| View Profile                 |     ✅    |      ✅     |
+| Edit Personal Information    |     ✅    |      ✅     |
+| Manage All Employee Profiles |     ❌    |      ✅     |
+| Check-In / Check-Out         |     ✅    |      ✅     |
+| View Own Attendance          |     ✅    |      ✅     |
+| View All Employee Attendance |     ❌    |      ✅     |
+| Apply for Leave              |     ✅    |      ❌     |
+| View Leave Status            |     ✅    |      ✅     |
+| Approve Leave                |     ❌    |      ✅     |
+| Reject Leave                 |     ❌    |      ✅     |
+| Add Approval Comments        |     ❌    |      ✅     |
+| View Salary Information      |     ✅    |      ✅     |
+| Update Salary Structure      |     ❌    |      ✅     |
+| HR Reports                   |  Limited |      ✅     |
+| Employee Management          |     ❌    |      ✅     |
+
+---
+
+# System Modules
 
 ```text
+                    ┌──────────────────────┐
+                    │       DAYFLOW        │
+                    │        HRMS          │
+                    └──────────┬───────────┘
+                               │
+                ┌──────────────┴──────────────┐
+                │                             │
+                ▼                             ▼
+        ┌───────────────┐             ┌───────────────┐
+        │   EMPLOYEE    │             │   ADMIN / HR  │
+        └───────┬───────┘             └───────┬───────┘
+                │                             │
+       ┌────────┼────────┐          ┌─────────┼──────────┐
+       ▼        ▼        ▼          ▼         ▼          ▼
+    Profile  Attendance Leave   Employees Attendance  Leave
+       │        │        │          │         │       Approval
+       │        │        │          │         │          │
+       └────────┴────────┘          └─────────┴──────────┘
+                │                             │
+                └─────────────┬───────────────┘
+                              ▼
                     ┌──────────────────┐
-                    │      User        │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Authentication   │
-                    │  Sign Up / Login │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Role Validation  │
-                    └────────┬─────────┘
-                             │
-                ┌────────────┴────────────┐
-                │                         │
-                ▼                         ▼
-       ┌─────────────────┐       ┌─────────────────┐
-       │    Employee     │       │    Admin / HR   │
-       │    Dashboard    │       │    Dashboard    │
-       └────────┬────────┘       └────────┬────────┘
-                │                         │
-        ┌───────┼────────┐       ┌────────┼─────────┐
-        ▼       ▼        ▼       ▼        ▼         ▼
-     Profile Attendance Leave  Employees Attendance Payroll
-                         │
-                         ▼
-                  Leave Approval
+                    │ Payroll / Reports│
+                    └──────────────────┘
 ```
 
 ---
 
-# Functional Requirements
+# Application Workflow
 
-The major functional requirements of Dayflow include:
-
-### Authentication
-
-* User registration
-* Email verification
-* Login
-* Password validation
-* Error handling
-
-### Authorization
-
-* Employee role
-* Admin/HR role
-* Role-specific dashboards
-* Restricted access to sensitive information
-
-### Employee Management
-
-* View employee profile
-* Edit employee information
-* Manage employee documents
-* Manage profile pictures
-
-### Attendance
-
-* Check-in
-* Check-out
-* Daily attendance
-* Weekly attendance
-* Attendance status management
-
-### Leave Management
-
-* Apply for leave
-* Select leave type
-* Select date range
-* Add remarks
-* Approve/reject leave
-* Add approval comments
-
-### Payroll
-
-* Employee salary visibility
-* Admin payroll management
-* Salary structure updates
-
-### Reports
-
-* Attendance reports
-* Salary slips
-* HR analytics
+```text
+                         ┌───────────┐
+                         │   User    │
+                         └─────┬─────┘
+                               │
+                               ▼
+                    ┌───────────────────┐
+                    │ Register / Login  │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │   Authentication  │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                    ┌───────────────────┐
+                    │  Role Verification│
+                    └─────────┬─────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 ▼                         ▼
+        ┌─────────────────┐       ┌─────────────────┐
+        │ Employee        │       │ Admin / HR      │
+        │ Dashboard       │       │ Dashboard       │
+        └────────┬────────┘       └────────┬────────┘
+                 │                         │
+       ┌─────────┼──────────┐     ┌────────┼───────────┐
+       ▼         ▼          ▼     ▼        ▼           ▼
+    Profile  Attendance   Leave Employees Attendance Leave
+                                      │                  │
+                                      ▼                  ▼
+                                   Payroll          Approval
+                                      │                  │
+                                      └────────┬─────────┘
+                                               ▼
+                                      Reports / Analytics
+```
 
 ---
 
-# Security
+# System Architecture
 
-Security is an important part of Dayflow because the system handles employee and payroll-related information.
+Dayflow follows a **frontend–backend architecture**.
 
-The application should implement:
+```text
+┌────────────────────────────────────────────────────────┐
+│                       CLIENT                           │
+│                                                        │
+│                  React Frontend                        │
+│                                                        │
+│     Login │ Dashboard │ Profile │ Attendance │ Leave  │
+└─────────────────────────┬──────────────────────────────┘
+                          │
+                          │ HTTP / API Requests
+                          ▼
+┌────────────────────────────────────────────────────────┐
+│                       SERVER                           │
+│                                                        │
+│                  Backend Application                   │
+│                                                        │
+│   Routes → Middleware → Controllers → Business Logic  │
+│                          │                             │
+│                          ▼                             │
+│                        Models                          │
+└─────────────────────────┬──────────────────────────────┘
+                          │
+                          ▼
+                 ┌──────────────────┐
+                 │     Database     │
+                 └──────────────────┘
+```
 
-* Secure authentication
-* Password protection
-* Email verification
-* Role-based authorization
-* Restricted employee data access
-* Read-only employee payroll access
-* Protected HR/Admin functionality
-* Secure session management
-* Input validation
-
-Employees should only be able to access information belonging to their own account, while HR/Admin users have broader management privileges.
+The repository separates the frontend and backend applications. The backend contains dedicated `controllers`, `middleware`, `models`, `routes`, and `utils` directories.
 
 ---
 
@@ -429,42 +441,76 @@ Employees should only be able to access information belonging to their own accou
 
 ### Frontend
 
-```text
-HTML
-JavaScript
-React.js
-```
+* React
+* JavaScript
+* HTML
+* CSS
+* Create React App
 
 ### Backend
 
-```text
-Node.js
-Express.js
-```
-
-### Database
-
-```text
-MongoDB
-```
-
-or the database used in your implementation.
-
-### Authentication
-
-```text
-JWT / Session Authentication
-Email Verification
-Password Hashing
-```
+* Node.js
+* Express-based backend architecture
+* REST-style API structure
+* Controllers
+* Middleware
+* Routes
+* Models
+* Utility modules
 
 ### Development Tools
 
+* Git
+* GitHub
+* npm
+* Visual Studio Code / preferred IDE
+
+> **Note:** Add any additional technologies actually used in the implementation here. Do not list technologies that are not present in the project.
+
+---
+
+# Project Structure
+
 ```text
-Git
-GitHub
-VS Code
-Postman
+Dayflow/
+│
+├── backend/
+│   │
+│   ├── controllers/
+│   │
+│   ├── middleware/
+│   │
+│   ├── models/
+│   │
+│   ├── routes/
+│   │
+│   ├── utils/
+│   │
+│   ├── server.js
+│   ├── package.json
+│   └── package-lock.json
+│
+├── frontend/
+│   │
+│   ├── public/
+│   │
+│   ├── src/
+│   │
+│   ├── package.json
+│   └── package-lock.json
+│
+├── screenshots/
+│   ├── login.png
+│   ├── employee-dashboard.png
+│   ├── admin-dashboard.png
+│   ├── profile.png
+│   ├── attendance.png
+│   ├── leave-management.png
+│   ├── payroll.png
+│   └── reports.png
+│
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -473,284 +519,277 @@ Postman
 
 ## Prerequisites
 
-Before running Dayflow, make sure the following are installed:
+Install the following before running Dayflow:
 
-* Git
-* Node.js
+* [Node.js](https://nodejs.org/)
 * npm
-* Database server/service
-* VS Code or another code editor
+* Git
 
 ---
 
 ## 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/dayflow.git
+git clone https://github.com/vijayalakshmisulikeri-commits/Dayflow.git
 ```
 
-Navigate into the project:
+Navigate to the project:
 
 ```bash
-cd dayflow
+cd Dayflow
 ```
 
 ---
 
-## 2. Install Dependencies
+# ⚙️ Environment Configuration
 
-For the backend:
-
-```bash
-cd backend
-npm install
-```
-
-For the frontend:
-
-```bash
-cd ../frontend
-npm install
-```
-
----
-
-## 3. Configure Environment Variables
-
-Create a `.env` file in the backend directory.
+If your application uses environment variables, create the required `.env` files based on the variables used by your implementation.
 
 Example:
 
 ```env
-PORT=5000
-DATABASE_URL=your_database_url
-JWT_SECRET=your_secret_key
-EMAIL_USER=your_email
-EMAIL_PASSWORD=your_email_password
+PORT=
+DATABASE_URL=
+JWT_SECRET=
 ```
 
-**Do not upload your actual `.env` file to GitHub.**
+### Important
 
-Instead, create:
+Never commit sensitive information such as:
 
 ```text
-.env.example
+.env
+passwords
+API keys
+database credentials
+JWT secrets
+private tokens
 ```
 
-with placeholder values.
+Use `.env.example` to document required variables without exposing their actual values.
 
 ---
 
-## 4. Start the Backend
+# Running the Application
+
+## Backend
+
+Open a terminal:
 
 ```bash
 cd backend
+npm install
+```
+
+Start the backend using the appropriate script defined in `backend/package.json`:
+
+```bash
 npm start
 ```
 
-The backend server should start on the configured port.
+If the project uses a development script instead:
 
-Example:
-
-```text
-http://localhost:5000
+```bash
+npm run dev
 ```
 
 ---
 
-## 5. Start the Frontend
+## Frontend
 
 Open another terminal:
 
 ```bash
 cd frontend
+npm install
 npm start
 ```
 
-The application should then be accessible through the frontend development URL.
+The React development server will normally be available at:
+
+```text
+http://localhost:3000
+```
 
 ---
 
 # Testing
 
-Testing should cover the major workflows of the application.
+For the React frontend:
 
-### Authentication Testing
+```bash
+cd frontend
+npm test
+```
 
-* Valid registration
-* Invalid registration
-* Valid login
-* Invalid login
-* Email verification
-* Password validation
+To create a production build:
 
-### Employee Testing
+```bash
+npm run build
+```
 
-* View profile
-* Edit permitted profile fields
-* View attendance
-* Check-in/check-out
-* Apply for leave
-* View leave status
-* View salary information
-
-### Admin Testing
-
-* View employees
-* View employee attendance
-* Approve leave
-* Reject leave
-* Add comments
-* View payroll
-* Update salary structure
+If automated backend tests have been added, document their commands here as well.
 
 ---
 
-# Role-Based Access Example
+# Screenshots
 
-| Feature                     | Employee | Admin/HR |
-| --------------------------- | :------: | :------: |
-| View own profile            |     ✅    |     ✅    |
-| Edit limited profile fields |     ✅    |     ✅    |
-| Edit all employee details   |     ❌    |     ✅    |
-| View own attendance         |     ✅    |     ✅    |
-| View all attendance         |     ❌    |     ✅    |
-| Apply for leave             |     ✅    |    ❌/✅   |
-| Approve leave               |     ❌    |     ✅    |
-| View own salary             |     ✅    |     ✅    |
-| View all payroll            |     ❌    |     ✅    |
-| Update salary structure     |     ❌    |     ✅    |
-| View HR reports             |  Limited |     ✅    |
+Screenshots should be stored inside the `screenshots/` directory.
+
+## Login
+
+![Dayflow Login](screenshots/login.png)
 
 ---
 
-# Main Modules
+## Employee Dashboard
+
+![Employee Dashboard](screenshots/employee-dashboard.png)
+
+---
+
+## Admin / HR Dashboard
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+---
+
+## Employee Profile
+
+![Employee Profile](screenshots/profile.png)
+
+---
+
+## Attendance Management
+
+![Attendance](screenshots/attendance.png)
+
+---
+
+## Leave Management
+
+![Leave Management](screenshots/leave-management.png)
+
+---
+
+## Payroll
+
+![Payroll](screenshots/payroll.png)
+
+---
+
+## Reports & Analytics
+
+![Reports](screenshots/reports.png)
+
+> Replace the image filenames above with the actual screenshot filenames you upload to the repository.
+
+---
+
+# Security & Access Control
+
+Dayflow follows role-based access principles to ensure that employees and Admin/HR users have appropriate permissions.
+
+Security considerations include:
+
+* Authentication before accessing protected functionality
+* Role-based authorization
+* Employee-specific information access
+* Restricted payroll modification
+* Controlled profile editing
+* Admin/HR management privileges
+* Protection of environment variables and credentials
+
+Sensitive credentials should never be stored directly in source code or committed to GitHub.
+
+---
+
+# Demo
+
+A demonstration of the completed Dayflow HRMS application can be provided as part of the project presentation.
+
+If the application is deployed, add the live application URL here:
 
 ```text
-Dayflow HRMS
-│
-├── Authentication
-│   ├── Sign Up
-│   ├── Sign In
-│   └── Email Verification
-│
-├── Employee Management
-│   ├── Employee Profile
-│   ├── Job Details
-│   └── Documents
-│
-├── Attendance
-│   ├── Check-In
-│   ├── Check-Out
-│   ├── Daily View
-│   └── Weekly View
-│
-├── Leave Management
-│   ├── Apply Leave
-│   ├── Pending Requests
-│   ├── Approval
-│   └── Rejection
-│
-├── Payroll
-│   ├── Salary Details
-│   ├── Salary Structure
-│   └── Salary Slips
-│
-├── Notifications
-│   ├── Email Alerts
-│   └── System Alerts
-│
-└── Analytics
-    ├── Attendance Reports
-    └── Salary Reports
+Live Demo: <deployment-link>
 ```
+
+---
+
+# Project Status
+
+### Completed
+
+Dayflow has been developed as a full-stack Human Resource Management System implementing the core HR workflows defined for the project.
+
+The system includes:
+
+* Authentication
+* Role-based access
+* Employee management
+* Attendance management
+* Leave management
+* Leave approval workflows
+* Payroll/salary management
+* Notifications and alerts
+* Reports and analytics
 
 ---
 
 # Future Enhancements
 
-The project can be extended with additional HR capabilities.
+Although the core system is completed, the following improvements can be considered in future versions:
 
-Possible future improvements include:
-
-* Automated payroll calculation
-* Biometric attendance integration
-* Mobile application
-* AI-powered HR analytics
-* Employee performance tracking
-* Recruitment management
-* Automated payslip generation
-* Advanced attendance analytics
-* Employee self-service portal
-* Calendar integration
-* Automated email notifications
-* Cloud deployment
-* Multi-organization support
+* Advanced HR analytics
+* More detailed attendance reports
+* Automated salary-slip generation
+* Enhanced email notification system
+* Additional HR workflows
+* Advanced reporting dashboards
+* Integration with external payroll systems
+* Cloud deployment and scalability improvements
+* Mobile application support
 
 ---
 
-# Project Design
+# Contributors
 
-The project design/flow can be viewed through the associated Excalidraw diagram:
+| Team Member                | Contribution          |
+| -------------------------- | --------------------- |
+| **Vijayalakshmi Sulikeri** | Project development   |
+| **[Member Name]**          | [Actual contribution] |
+| **[Member Name]**          | [Actual contribution] |
+| **[Member Name]**          | [Actual contribution] |
 
-**Dayflow System Design:**
-https://link.excalidraw.com/l/65VNwvy7c4X/58RLEJ4oOwh
-
----
-
-# 📜 License
-
-This project is developed for **educational and academic purposes**.
-
+> Replace the placeholders with your actual team members and contributions.
 
 ---
 
-# 👩‍💻 Project Information
+# Project Documentation
 
-### Project Name
+The project requirements define Dayflow around secure authentication, role-based access, employee profiles, attendance tracking, leave management, payroll visibility/control, notifications, and reporting.
 
-**Dayflow – Human Resource Management System**
+The requirements also specify that employees should be able to view their own attendance while Admin/HR users can access attendance across employees.
 
-### Tagline
+Leave requests support paid, sick, and unpaid leave, with Pending, Approved, and Rejected states and Admin/HR approval.
+
+---
+
+# License
+
+This project was developed for **academic and educational purposes**.
+
+---
+
+# Dayflow
 
 > **Every workday, perfectly aligned.**
 
-### Project Category
-
-**Human Resource Management System (HRMS)**
-
-### Core Focus
-
-```text
-Employee Management
-Attendance
-Leave Management
-Payroll Visibility
-Role-Based Access
-HR Approval Workflows
-Reports & Analytics
-```
+A centralized HR platform designed to make everyday employee and HR operations **simpler, organized, and accessible**.
 
 ---
 
-# ⭐ Acknowledgement
+## 🔗 Repository
 
-Dayflow was designed to simplify and digitize common HR operations by providing employees and HR/Admin personnel with a centralized platform for managing employee-related activities.
-
-The system requirements cover authentication, role-based access, employee profiles, attendance, leave management, payroll, notifications, and reporting.
-
----
-
-## 📌 Project Status
-
-```text
-🚧 Under Development
-```
-
-The implementation may evolve as additional features, integrations, testing, and deployment configurations are added.
-
----
-
-## ⭐ If you find this project useful
-
-Consider giving the repository a ⭐ on GitHub!
+**GitHub:**
+https://github.com/vijayalakshmisulikeri-commits/Dayflow
