@@ -465,8 +465,6 @@ The repository separates the frontend and backend applications. The backend cont
 * npm
 * Visual Studio Code / preferred IDE
 
-> **Note:** Add any additional technologies actually used in the implementation here. Do not list technologies that are not present in the project.
-
 ---
 
 # Project Structure
