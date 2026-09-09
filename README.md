@@ -754,12 +754,9 @@ Although the core system is completed, the following improvements can be conside
 
 | Team Member                | Contribution          |
 | -------------------------- | --------------------- |
-| **Vijayalakshmi Sulikeri** | Project development   |
-| **[Member Name]**          | [Actual contribution] |
-| **[Member Name]**          | [Actual contribution] |
-| **[Member Name]**          | [Actual contribution] |
-
-> Replace the placeholders with your actual team members and contributions.
+| **Vijayalakshmi Sulikeri** | Frontend development  |
+| **Mrudhula P**             | Backend development   |
+| **Khushi Patil**           | Backend development   |
 
 ---
 
